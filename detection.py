@@ -71,7 +71,7 @@ try:
         while len(data) < data_len:
             data += sock.recv(data_len)
         # decode image
-        frame = np.ascontiguousarray(np.frombuffer(data, np.uint8).reshape(h, w, 3)[...,::-1])
+        frame = np.ascontiguousarray(np.frombuffer(data, np.uint8).reshape(h, w, 3))
         if DETECT_FACE:
             face_blob = cv2.dnn.blobFromImage(frame, size=(672, 382), ddepth=cv2.CV_8U)
             face_net.setInput(face_blob)

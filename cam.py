@@ -49,7 +49,7 @@ def main(session):
     
     video_service = session.service("ALVideoDevice")
     resolution = 2	# check image_size for resolution, max is 3. 2 is recommended.
-    colorSpace = 11	# RGB
+    colorSpace = 13	# BGR, for openCV
 
     image_size = ['320x240x3', '640x480x3', '1280x960x3']
     
