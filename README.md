@@ -1,10 +1,13 @@
 ## run
 
-```python
+```bash
 python2 cam.py
 ```
 
-```python
+```bash
+# set openvino environment
+source ~/intel/openvino/bin/setupvars.sh
+
 python3 detection.py
 ```
 
