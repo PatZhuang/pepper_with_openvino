@@ -18,27 +18,27 @@ face_model_bin = '/home/center/openvino_models/ir/intel/face-detection-adas-0001
 person_model_xml = '/home/center/openvino_models/ir/intel/person-detection-retail-0013/FP16/person-detection-retail-0013.xml'
 person_model_bin = '/home/center/openvino_models/ir/intel/person-detection-retail-0013/FP16/person-detection-retail-0013.bin'
 
-DEVICE = 'MYRIAD'
-
 DETECT_FACE = False
 DETECT_PERSON = True
 
 # read model
 
-face_net = cv2.dnn.readNet(face_model_xml, face_model_bin)
-person_net = cv2.dnn.readNet(person_model_xml, person_model_bin)
+if DETECT_FACE:
+    face_net = cv2.dnn.readNet(face_model_xml, face_model_bin)
+    # specify target device
+    face_net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
+    face_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 
-# specify target device
-face_net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
-face_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
-person_net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
-person_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
+    face_input_blob = 'data'
+    face_out_blob = 'detection_out'
 
-face_input_blob = 'data'
-face_out_blob = 'detection_out'
-person_input_blob = 'data'
-person_out_blob = 'detection_out'
+if DETECT_PERSON:
+    person_net = cv2.dnn.readNet(person_model_xml, person_model_bin)
+    person_net.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
+    person_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 
+    person_input_blob = 'data'
+    person_out_blob = 'detection_out'
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
